@@ -1,5 +1,7 @@
 # ts-vue-todo
 
+vue3 + typescript todo app
+
 ## Project setup
 ```
 npm install
