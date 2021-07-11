@@ -1,7 +1,7 @@
-import {createStore} from 'vuex'
+import { createStore } from 'vuex'
 
-import Note from "@/models/NoteModel";
-import ToDo from "@/models/ToDoModel";
+import Note from '@/models/NoteModel'
+import ToDo from '@/models/ToDoModel'
 
 export default createStore({
   strict: process.env.NODE_ENV !== 'production',
@@ -10,67 +10,66 @@ export default createStore({
     currentNote: {
       title: '',
       todos: [] as ToDo[],
-      id: 0,
+      id: 0
     } as Note
   },
   mutations: {
-    addNote(state) {
-      state.notes.push(state.currentNote);
+    addNote (state) {
+      state.notes.push(state.currentNote)
     },
-    deleteNote(state) {
-      state.notes = state.notes.filter(note => note.id !== state.currentNote.id);
+    deleteNote (state) {
+      state.notes = state.notes.filter(note => note.id !== state.currentNote.id)
     },
-    updateNote(state) {
-      const note = state.notes.find(note => note.id === state.currentNote.id);
-      const index = state.notes.indexOf(note as Note);
-      state.notes[index] = state.currentNote;
+    updateNote (state) {
+      const note = state.notes.find(note => note.id === state.currentNote.id)
+      const index = state.notes.indexOf(note as Note)
+      state.notes[index] = state.currentNote
     },
-    setCurrentNote(state, payload: Note) {
-      state.currentNote = payload;
+    setCurrentNote (state, payload: Note) {
+      state.currentNote = payload
     },
-    updateTitles(state, payload: string) {
-      state.currentNote.title = payload;
+    updateTitles (state, payload: string) {
+      state.currentNote.title = payload
     },
-    updateTodos(state, payload: ToDo[]) {
-      state.currentNote.todos = payload;
+    updateTodos (state, payload: ToDo[]) {
+      state.currentNote.todos = payload
     },
-    addNewTodo(state) {
+    addNewTodo (state) {
       state.currentNote.todos.push({
         text: '',
         completed: false
-      });
+      })
     },
-    deleteTodo(state, index: number) {
-      state.currentNote.todos.splice(index, 1);
-    },
+    deleteTodo (state, index: number) {
+      state.currentNote.todos.splice(index, 1)
+    }
   },
   actions: {
-    saveNote({commit}) {
-      const isOldNote: boolean = this.state.notes.some(note => note.id === this.state.currentNote.id);
+    saveNote ({ commit }) {
+      const isOldNote: boolean = this.state.notes.some(note => note.id === this.state.currentNote.id)
 
       if (isOldNote) {
         commit('updateNote')
-      }
-      else {
-        commit('addNote');
+      } else {
+        commit('addNote')
       }
     },
-    fetchCurrentNote({commit}, noteId: number) {
-      const note = JSON.parse(JSON.stringify(this.state.notes.find(note => note.id === noteId)));
-      commit('setCurrentNote', note);
+    fetchCurrentNote ({ commit }, noteId: number) {
+      const note = JSON.parse(JSON.stringify(this.state.notes.find(note => note.id === noteId)))
+      commit('setCurrentNote', note)
     },
-    updateCurrentNote({commit}, note: Note) {
-      commit('setCurrentNote', note);
+    updateCurrentNote ({ commit }, note: Note) {
+      commit('setCurrentNote', note)
     }
   },
   getters: {
-    getIdOfLastNote(state): number {
+    getIdOfLastNote (state): number {
       if (state.notes.length === 0) {
-        return 0;
+        return 0
       }
 
-      const index = state.notes.length - 1;
-      return state.notes[index].id;
+      const index = state.notes.length - 1
+      return state.notes[index].id
     }
   }
 })

@@ -1,4 +1,4 @@
-import ToDo from "@/models/ToDoModel";
+import ToDo from '@/models/ToDoModel'
 
 export default interface Note {
   title: string;

@@ -64,10 +64,10 @@ export default defineComponent({
       router.push('/')
     }
 
-    const { currentNote } = router
+    const { currentRoute } = router
     const fetchNote = () => {
-      if (currentNote.value.params.id) {
-        const routerId: number = +currentNote.value.params.id
+      if (currentRoute.value.params.id) {
+        const routerId: number = +currentRoute.value.params.id
         store.dispatch('fetchCurrentNote', routerId)
       } else {
         const id = store.getters.getIdOfLastNote + 1

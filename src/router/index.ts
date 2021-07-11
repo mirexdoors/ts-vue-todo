@@ -1,16 +1,22 @@
-import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
-import Note from "@/views/Note.vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import Note from '@/views/Note.vue'
+import List from '@/views/List.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/',
+    name: 'List',
+    component: () => List
+  },
+  {
     path: '/note',
     name: 'Create',
-    component: Note
+    component: () => Note
   },
   {
     path: '/note/:id',
     name: 'Edit',
-    component: Note
+    component: () => Note
   }
 ]
 
